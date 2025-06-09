@@ -29,6 +29,7 @@ oaks=pygame.image.load('/home/quinto/Escritorio/Benjamin Vega 5B 2025/prog/juego
 pokeball=pygame.image.load('/home/quinto/Escritorio/Benjamin Vega 5B 2025/prog/juegopokemon/pokebalf.png')
 pi=pygame.image.load('/home/quinto/Escritorio/Benjamin Vega 5B 2025/prog/juegopokemon/pikachu.png')
 mision2=pygame.image.load('/home/quinto/Escritorio/Benjamin Vega 5B 2025/prog/juegopokemon/misiones.png')
+talkk=pygame.image.load('/home/quinto/Escritorio/Benjamin Vega 5B 2025/prog/juegopokemon/talk.png')
 
 # Escalar imágenes
 play = pygame.transform.scale(play, (40, 46))
@@ -46,6 +47,7 @@ oaks=pygame.transform.scale(oaks, (300, 180))
 pokeball=pygame.transform.scale(pokeball, (27, 27))
 pi=pygame.transform.scale(pi, (150, 190))
 mision2=pygame.transform.scale(mision2, (ancho/1.5, alto/1.5))
+talkk=pygame.transform.scale(talkk, (35, 35))
 
 # Animaciones
 anim1 = [play2, play3]
@@ -70,6 +72,9 @@ playlugary=365
             
 misionlugar=mision2.get_rect()
 misionlugar.center=(250,250)
+
+
+
             
 def main(pk):
     screen = pygame.display.set_mode((ancho, alto))
@@ -81,8 +86,9 @@ def main(pk):
     font2 = pygame.font.Font("/home/quinto/Escritorio/Benjamin Vega 5B 2025/prog/juegopokemon/viejito/viejito2.ttf", 7)
 
     fram = 0
-
     
+    hablando=True
+
     #Posiciones iniciales
     playlugar = play.get_rect()
     playlugar.center = (250, 420)
@@ -98,6 +104,9 @@ def main(pk):
     
     pika=pi.get_rect()
     pika.center=(250,250)
+    
+    talkl=talkk.get_rect()
+    talkl.center=(230,210)
     
     #Obstáculos
     obstaculos = [
@@ -157,6 +166,9 @@ def main(pk):
         screen.blit(oak,oak2)
         screen.blit(play_actual, playlugar)
         
+        if hablando:
+            screen.blit(talkk,talkl)
+        
         if pk==0:
             screen.blit(pokeball,ball)
         else:
@@ -168,6 +180,7 @@ def main(pk):
             text1 = font.render(talk, True, (0, 0, 0))
             screen.blit(text1, (dialog.x + 38, dialog.y + 30))
             if tecla_p[pygame.K_r]:
+                hablando=False
                 texto=font2.render(lol3, True, (0, 0, 0))
                 screen.blit(oaks,(100,150))
                 screen.blit(dialogo,dialog)
@@ -187,7 +200,7 @@ def main(pk):
             pygame.event.pump() #procesa los eventos pendientes, obligando a pygame a actualizar lo visual
             time.sleep(1.5)
             pk=pk+1
-
+            hablando=True
             
         if pk==1:
             if playlugar.colliderect(oak2):
@@ -195,6 +208,7 @@ def main(pk):
                 text1 = font.render(talk, True, (0, 0, 0))
                 screen.blit(text1, (dialog.x + 38, dialog.y + 30))
                 if tecla_p[pygame.K_r]:
+                    hablando=False
                     text=font2.render(chau2, True, (0, 0, 0))
                     screen.blit(oaks,(100,150))
                     screen.blit(dialogo,dialog)
