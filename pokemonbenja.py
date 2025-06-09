@@ -29,6 +29,7 @@ dialogo = pygame.image.load('/home/quinto/Escritorio/Benjamin Vega 5B 2025/prog/
 puerta= pygame.image.load('/home/quinto/Escritorio/Benjamin Vega 5B 2025/prog/juegopokemon/puerta.png')
 icon=pygame.image.load('/home/quinto/Escritorio/Benjamin Vega 5B 2025/prog/juegopokemon/iconico.png')
 mision2=pygame.image.load('/home/quinto/Escritorio/Benjamin Vega 5B 2025/prog/juegopokemon/misiones.png')
+talk=pygame.image.load('/home/quinto/Escritorio/Benjamin Vega 5B 2025/prog/juegopokemon/talk.png')
 
 #escalar imágenes
 play = pygame.transform.scale(play, (30, 36))
@@ -43,8 +44,8 @@ play9 = pygame.transform.scale(play9, (30, 36))
 blastoise = pygame.transform.scale(blastoise, (50, 50))
 ben = pygame.transform.scale(ben, (45, 45))
 dialogo = pygame.transform.scale(dialogo, (ancho, 100))
-puerta=pygame.transform.scale(puerta, (45, 45))
 mision2=pygame.transform.scale(mision2, (ancho/1.5, alto/1.5))
+talk=pygame.transform.scale(talk, (25, 25))
 
 #animaciones
 anim1 = [play2, play3]
@@ -93,6 +94,8 @@ def main(pk, playlugarx,playlugary):
     dialog = dialogo.get_rect()
     dialog.topleft = (0, alto - 100)
     
+    talkl=talk.get_rect()
+    talkl.center=(60,420)
 
 
     #obstáculos/colisiones
@@ -148,11 +151,14 @@ def main(pk, playlugarx,playlugary):
         
         #dibujar elementos
         
+        
         screen.blit(fondo, (0, 0))
+        
         screen.blit(blastoise, blastoiselu)
         screen.blit(ben, benfinal)
         screen.blit(play_actual, playlugar)
         screen.blit(mision,(10,10))
+        screen.blit(talk,talkl)
         
         #hablar con npcs
         if playlugar.colliderect(benfinal):
@@ -160,6 +166,7 @@ def main(pk, playlugarx,playlugary):
             text1 = font.render(hablar, True, (0, 0, 0))
             screen.blit(text1, (dialog.x + 38, dialog.y + 30))
             if tecla_p[pygame.K_r]:
+                talkl=(600,600)
                 if pk == 0:
                     text2 = font2.render(hablar2, True, (0, 0, 0))
                     screen.blit(dialogo, dialog)
