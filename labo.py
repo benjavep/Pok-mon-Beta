@@ -9,10 +9,10 @@ alto = 500
 
 pygame.init()
 
-# Colores
+#colores
 blanco = (255, 255, 255)
 
-# Imágenes
+#Imágenes
 fondo_original = pygame.image.load('/home/quinto/Escritorio/Benjamin Vega 5B 2025/prog/juegopokemon/laboratorio.png')
 play = pygame.image.load('/home/quinto/Escritorio/Benjamin Vega 5B 2025/prog/juegopokemon/azulfrente2.png')
 play2 = pygame.image.load('/home/quinto/Escritorio/Benjamin Vega 5B 2025/prog/juegopokemon/azulfrente3.png')
@@ -30,8 +30,10 @@ pokeball=pygame.image.load('/home/quinto/Escritorio/Benjamin Vega 5B 2025/prog/j
 pi=pygame.image.load('/home/quinto/Escritorio/Benjamin Vega 5B 2025/prog/juegopokemon/pikachu.png')
 mision2=pygame.image.load('/home/quinto/Escritorio/Benjamin Vega 5B 2025/prog/juegopokemon/misiones.png')
 talkk=pygame.image.load('/home/quinto/Escritorio/Benjamin Vega 5B 2025/prog/juegopokemon/talk.png')
+vaporeon=pygame.image.load('/home/quinto/Escritorio/Benjamin Vega 5B 2025/prog/juegopokemon/vaporeon.png')
+vaporeon2=pygame.image.load('/home/quinto/Escritorio/Benjamin Vega 5B 2025/prog/juegopokemon/vaporeon2.png')
 
-# Escalar imágenes
+#Escalar imágenes
 play = pygame.transform.scale(play, (40, 46))
 play2 = pygame.transform.scale(play2, (40, 46))
 play3 = pygame.transform.scale(play3, (40, 46))
@@ -48,23 +50,28 @@ pokeball=pygame.transform.scale(pokeball, (27, 27))
 pi=pygame.transform.scale(pi, (150, 190))
 mision2=pygame.transform.scale(mision2, (ancho/1.5, alto/1.5))
 talkk=pygame.transform.scale(talkk, (35, 35))
+vaporeon=pygame.transform.scale(vaporeon, (380, 270))
+vaporeon2=pygame.transform.scale(vaporeon2, (380, 270))
 
-# Animaciones
+#Animaciones
 anim1 = [play2, play3]
 anim2 = [play4, play5]
 anim3 = [play6, play7]
 anim4 = [play8, play9]
 
-# Textos
+#Textos
 misi= "Presiona 'M' para ver las misiones"
-lol="Hola! Soy Oak el profesor Pokémon! Oí que iniciaras tu viaje,"
-lol2= "por lo que... en aquella mesa deje un amiguito que"
-lol3="te ayudara en tu travesia."
+lol="Hola! Soy Oak el profesor Pokémon! Oí que "
+lol2= "iniciaras tu viaje, por lo que en aquella mesa "
+lol3="deje un amiguito que te ayudara en tu travesia."
 bl="¡Obtuviste un Pikachu nivel 5!"
 talk= "Manten presionado ¨R¨ para hablar"
 chau0= "¡Ese Pikachu se nota que te quiere!"
 chau="Hay un chico allá afuera que quiere una batalla."
 chau2="Ve y demuestrale de que estas hecho/a!"
+talk2="Mirar las noticias (E)"
+noticia="Que noticia tan curiosa-"
+noticia2="Bue, no pasaba nada bueno"
 
 pk = 0
 playlugarx=340
@@ -73,8 +80,7 @@ playlugary=365
 misionlugar=mision2.get_rect()
 misionlugar.center=(250,250)
 
-
-
+#En este código no voy a decir que hace cada cosa porque ya lo explique en pokemonbenja.py, solo explicare lo nuevo
             
 def main(pk):
     screen = pygame.display.set_mode((ancho, alto))
@@ -83,7 +89,7 @@ def main(pk):
     fondo = pygame.transform.scale(fondo_original, (ancho, alto))
     clock = pygame.time.Clock()
     font = pygame.font.Font("/home/quinto/Escritorio/Benjamin Vega 5B 2025/prog/juegopokemon/viejito/viejito2.ttf", 13)
-    font2 = pygame.font.Font("/home/quinto/Escritorio/Benjamin Vega 5B 2025/prog/juegopokemon/viejito/viejito2.ttf", 7)
+    font2 = pygame.font.Font("/home/quinto/Escritorio/Benjamin Vega 5B 2025/prog/juegopokemon/viejito/viejito2.ttf", 9)
 
     fram = 0
     
@@ -120,11 +126,13 @@ def main(pk):
         pygame.Rect(20, 0, 20, 500),     # pared izquierda
         pygame.Rect(460, 0, 20, 500),   # pared derecha
         pygame.Rect(0, 480, 500, 20),   #pared abajo
-        pygame.Rect(245, 230, 9, 9),
+        pygame.Rect(245, 230, 9, 9),   #oak
         
     ]
 
     salida= pygame.Rect(220, 470, 60, 35) #salida
+    
+    pc= pygame.Rect(105, 55, 10, 25) #posición de la computadora 
     
     while True:
         for event in pygame.event.get():
@@ -182,15 +190,31 @@ def main(pk):
             if tecla_p[pygame.K_r]:
                 hablando=False
                 texto=font2.render(lol3, True, (0, 0, 0))
-                screen.blit(oaks,(100,150))
-                screen.blit(dialogo,dialog)
                 text4=(font2.render(lol, True, (0, 0, 0)))
-                screen.blit(dialogo, dialog)
-                screen.blit(text4,(dialog.x + 38, dialog.y + 30))
                 text5=(font2.render(lol2, True, (0, 0, 0))) 
+                screen.blit(dialogo, dialog)
+                screen.blit(oaks,(100,150))
+                screen.blit(text4,(dialog.x + 38, dialog.y + 30))
                 screen.blit(text5,(dialog.x + 38, dialog.y + 50))
                 screen.blit(texto,(dialog.x + 38, dialog.y + 70))
 
+        if playlugar.colliderect(pc):
+            screen.blit(dialogo, dialog)
+            text1 = font.render(talk2, True, (0, 0, 0))
+            text2 = font.render(noticia, True, (0, 0, 0))
+            text3 = font.render(noticia2, True, (0, 0, 0))
+            screen.blit(text1, (dialog.x + 38, dialog.y + 30))
+            if pk==0:
+                if tecla_p[pygame.K_e]:
+                    screen.blit(vaporeon,[70,70])
+                    screen.blit(dialogo, dialog)
+                    screen.blit(text2,(dialog.x + 38, dialog.y + 30) )
+            else:
+                if tecla_p[pygame.K_e]:
+                    screen.blit(dialogo, dialog)
+                    screen.blit(text3,(dialog.x + 38, dialog.y + 30))
+                    screen.blit(vaporeon2,[70,70])
+                    
         if playlugar.colliderect(ball):
             screen.blit(dialogo, dialog)
             pok = font.render(bl, True, (0, 0, 0))
@@ -199,8 +223,8 @@ def main(pk):
             pygame.display.update() #dibuja en la pantalla
             pygame.event.pump() #procesa los eventos pendientes, obligando a pygame a actualizar lo visual
             time.sleep(1.5)
-            pk=pk+1
-            hablando=True
+            pk=pk+1 #esta variable sirve para contar cuantos pokemones  
+            hablando=True #esto sirve para mostrar o no el icono arriba de los npc
             
         if pk==1:
             if playlugar.colliderect(oak2):
@@ -210,12 +234,13 @@ def main(pk):
                 if tecla_p[pygame.K_r]:
                     hablando=False
                     text=font2.render(chau2, True, (0, 0, 0))
+                    textoo=(font2.render(chau0, True, (0, 0, 0)))
+                    textoo0=(font2.render(chau, True, (0, 0, 0))) 
+                    
                     screen.blit(oaks,(100,150))
                     screen.blit(dialogo,dialog)
-                    textoo=(font2.render(chau0, True, (0, 0, 0)))
                     screen.blit(dialogo, dialog)
                     screen.blit(textoo,(dialog.x + 38, dialog.y + 30))
-                    textoo0=(font2.render(chau, True, (0, 0, 0))) 
                     screen.blit(textoo0,(dialog.x + 38, dialog.y + 50))
                     screen.blit(text,(dialog.x + 38, dialog.y + 70))
             
