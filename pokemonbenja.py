@@ -1,6 +1,6 @@
 import pygame
 from pygame.locals import *
-import sys
+import sys 
 import labo
 import batalla
 
@@ -55,7 +55,9 @@ anim4 = [play8, play9]
 
 #textos
 hablar = "Manten presionado ¨R¨ para hablar"
-hablar2 = "¿En serio quieres una batalla? NO TIENES POKÉMONES"
+hablar2 = "¡OYE! No tienes pokémones para luchar"
+hablar3= "ven a buscarme cuando tengas un pokémon"
+hablar4= "En aquel edificio los estan regalando ;)"
 misi= "Presiona 'M' para ver las misiones"
 
 
@@ -67,7 +69,9 @@ playlugarx=130 #esta variable es la posición x inicial del jugador
 playlugary=200 #esta variable es la posición y inicial del jugador
 
 misionlugar=mision2.get_rect()
-misionlugar.center=(250,250)
+misionlugar.center=(250,250) #posición del icono de la misi+on
+
+        
         
 def main(pk, playlugarx,playlugary):
     screen = pygame.display.set_mode((ancho, alto))
@@ -76,7 +80,7 @@ def main(pk, playlugarx,playlugary):
     fondo = pygame.transform.scale(fondo_original, (ancho, alto))
     clock = pygame.time.Clock()
     font = pygame.font.Font("/home/quinto/Escritorio/Benjamin Vega 5B 2025/prog/juegopokemon/viejito/viejito2.ttf", 13)
-    font2 = pygame.font.Font("/home/quinto/Escritorio/Benjamin Vega 5B 2025/prog/juegopokemon/viejito/viejito2.ttf", 8)
+    font2 = pygame.font.Font("/home/quinto/Escritorio/Benjamin Vega 5B 2025/prog/juegopokemon/viejito/viejito2.ttf", 10)
 
     fram = 0
     
@@ -100,18 +104,18 @@ def main(pk, playlugarx,playlugary):
 
     #obstáculos/colisiones
     obstaculos = [
-        pygame.Rect(100, 90, 110, 80),   #casa jugador
-        pygame.Rect(285, 90, 110, 80),  #casa rival
+        pygame.Rect(100, 90, 110, 80),#casa jugador
+        pygame.Rect(285, 90, 110, 80),#casa rival
         pygame.Rect(270, 240, 145, 80),#laboratorio
-        pygame.Rect(100, 275, 110, 5),  #valla1
-        pygame.Rect(270, 400, 119, 5), #valla2
+        pygame.Rect(100, 275, 110, 5),#valla1
+        pygame.Rect(270, 400, 119, 5),#valla2
         pygame.Rect(145, 430, 85, 70),#agua
-        pygame.Rect(85, 170, 20, 20),   #correo
-        pygame.Rect(110, 350, 10, 10),  #cartel 
-        pygame.Rect(0, 20, 500, 20),     #arboles arriba
-        pygame.Rect(20, 0, 20, 500),     #arboles izquierda
-        pygame.Rect(460, 0, 20, 500),   #arboles derecha
-        pygame.Rect(0, 480, 500, 20), #arboles abajo
+        pygame.Rect(85, 170, 20, 20),#correo
+        pygame.Rect(110, 350, 10, 10),#cartel 
+        pygame.Rect(0, 20, 500, 20),#arboles arriba
+        pygame.Rect(20, 0, 20, 500),#arboles izquierda
+        pygame.Rect(460, 0, 20, 500),#arboles derecha
+        pygame.Rect(0, 480, 500, 20),#arboles abajo
     ]
 
     entrar=pygame.Rect(340, 280, 15, 50) #puerta del lab
@@ -150,10 +154,7 @@ def main(pk, playlugarx,playlugary):
         mision = font.render(misi, True, ( 0, 50, 0 ))
         
         #dibujar elementos
-        
-        
         screen.blit(fondo, (0, 0))
-        
         screen.blit(blastoise, blastoiselu)
         screen.blit(ben, benfinal)
         screen.blit(play_actual, playlugar)
@@ -162,16 +163,22 @@ def main(pk, playlugarx,playlugary):
         
         #hablar con npcs
         if playlugar.colliderect(benfinal):
-            screen.blit(dialogo, dialog)
+            screen.blit(dialogo, dialog) #cuadrado donde aparecera el dialogo
             text1 = font.render(hablar, True, (0, 0, 0))
-            screen.blit(text1, (dialog.x + 38, dialog.y + 30))
-            if tecla_p[pygame.K_r]:
-                talkl=(600,600)
-                if pk == 0:
+            screen.blit(text1, (dialog.x + 38, dialog.y + 30)) #dialogo
+            if tecla_p[pygame.K_r]: #se habla con R
+                talkl = (600,600) #esto sirve para que el icono arriba del NPC se vaya de pantalla 
+                if pk == 0: #esto sirve para que no lo rete a una batalla si no tiene 1 pokemon
                     text2 = font2.render(hablar2, True, (0, 0, 0))
+                    text22 = font2.render(hablar3, True, (0, 0, 0))
+                    text23 = font2.render(hablar4, True, (0, 0, 0))
+                    
                     screen.blit(dialogo, dialog)
                     screen.blit(text2, (dialog.x + 38, dialog.y + 30))
-                else: 
+                    screen.blit(text22, (dialog.x + 38, dialog.y + 50)) #esta parte es para mostrar los dialogos del rival
+                    screen.blit(text23, (dialog.x + 38, dialog.y + 70))
+                    
+                else: #si el jugador SI tiene un pokémon, el npc lo retara a una batalla
                     batalla.main()
        
         if tecla_p[pygame.K_m]: #ver misiones
