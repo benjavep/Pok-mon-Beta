@@ -13,6 +13,20 @@ font = pygame.font.Font(None, 25)
 #cargar la imagen del icono
 icon_original = pygame.image.load('/home/quinto/Escritorio/Benjamin Vega 5B 2025/prog/juegopokemon/iconico.png')
 
+def fade(screen,fondo): #esta definición la utilizamos para que haya una transicion para inciar el juego
+    fade_surface = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT))
+    fade_surface.fill((0, 0, 0))
+
+    #fundido a negro
+    for alpha in range(0, 255, 10):
+        fade_surface.set_alpha(alpha)
+        screen.blit(fondo, (0, 0))
+        screen.blit(fade_surface, (0, 0))
+        pygame.display.flip()
+        pygame.time.delay(30)
+
+    #cambiar a la siguiente escena
+    reglas.main()
 
 def main():
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -31,7 +45,7 @@ def main():
         screen.blit(icon_escalada, (0, 0))
 
         if teclas[pygame.K_e]:
-            reglas.main()
+            fade(screen,icon_escalada)
 
         pygame.display.flip()
         reloj.tick(60)
