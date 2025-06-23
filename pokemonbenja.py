@@ -30,6 +30,7 @@ puerta= pygame.image.load('/home/quinto/Escritorio/Benjamin Vega 5B 2025/prog/ju
 icon=pygame.image.load('/home/quinto/Escritorio/Benjamin Vega 5B 2025/prog/juegopokemon/iconico.png')
 mision2=pygame.image.load('/home/quinto/Escritorio/Benjamin Vega 5B 2025/prog/juegopokemon/misiones.png')
 talk=pygame.image.load('/home/quinto/Escritorio/Benjamin Vega 5B 2025/prog/juegopokemon/talk.png')
+matias=pygame.image.load('/home/quinto/Escritorio/Benjamin Vega 5B 2025/prog/juegopokemon/matias.png')
 
 #escalar imágenes
 play = pygame.transform.scale(play, (30, 36))
@@ -46,6 +47,7 @@ ben = pygame.transform.scale(ben, (45, 45))
 dialogo = pygame.transform.scale(dialogo, (ancho, 100))
 mision2=pygame.transform.scale(mision2, (ancho/1.5, alto/1.5))
 talk=pygame.transform.scale(talk, (25, 25))
+matias=pygame.transform.scale(matias, (200, 240))
 
 #animaciones
 anim1 = [play2, play3]
@@ -56,10 +58,9 @@ anim4 = [play8, play9]
 #textos
 hablar = "Manten presionado ¨R¨ para hablar"
 hablar2 = "¡OYE! No tienes pokémones para luchar"
-hablar3= "ven a buscarme cuando tengas un pokémon"
-hablar4= "En aquel edificio los estan regalando ;)"
+hablar3= "ven a buscarme cuando tengas un pokémon,"
+hablar4= "en aquel edificio los estan regalando."
 misi= "Presiona 'M' para ver las misiones"
-
 
 #icono
 pygame.display.set_icon(icon)
@@ -167,6 +168,7 @@ def main(pk, playlugarx,playlugary):
             text1 = font.render(hablar, True, (0, 0, 0))
             screen.blit(text1, (dialog.x + 38, dialog.y + 30)) #dialogo
             if tecla_p[pygame.K_r]: #se habla con R
+                screen.blit(matias,[290,190])
                 talkl = (600,600) #esto sirve para que el icono arriba del NPC se vaya de pantalla 
                 if pk == 0: #esto sirve para que no lo rete a una batalla si no tiene 1 pokemon
                     text2 = font2.render(hablar2, True, (0, 0, 0))
